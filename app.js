@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 
+
 var app = express();
 
 // view engine setup
@@ -23,6 +24,15 @@ app.use(express.static(path.join(__dirname, 'app')));
 
 //Routes
 app.use('/', index);
+
+var connection = require('./connection');
+var routes = require('./routes/modelroutes');
+
+connection.init();
+routes.configure(app);
+// var server = app.listen(3000, function() {
+//   console.log('Server listening on port ' + server.address().port);
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
